@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevCraft - Web Development Agency</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            background: #4a6fa5;
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background: #3a5a8a;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark-mode header {
+            background-color: #1e1e1e;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4a6fa5;
+        }
+        
+        .logo span {
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .logo span {
+            color: #f5f5f5;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .nav-links a {
+            color: #f5f5f5;
+        }
+        
+        .nav-links a:hover {
+            color: #4a6fa5;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .theme-toggle {
+            color: #f5f5f5;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            transition: background-color 0.3s ease;
+        }
+        
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        body.dark-mode #home {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .hero-content h1 {
+            color: #f5f5f5;
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 30px;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .hero-content p {
+            color: #bbb;
+        }
+        
+        /* About Section */
+        #about {
+            background-color: #fff;
+        }
+        
+        body.dark-mode #about {
+            background-color: #1e1e1e;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .section-title h2 {
+            color: #f5f5f5;
+        }
+        
+        .section-title p {
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .section-title p {
+            color: #bbb;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .about-text h3 {
+            color: #f5f5f5;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .about-text p {
+            color: #bbb;
+        }
+        
+        /* Services Section */
+        #services {
+            background-color: #f9f9f9;
+        }
+        
+        body.dark-mode #services {
+            background-color: #121212;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .service-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        
+        body.dark-mode .service-card {
+            background-color: #1e1e1e;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: #4a6fa5;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .service-card h3 {
+            color: #f5f5f5;
+        }
+        
+        .service-card p {
+            color: #666;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .service-card p {
+            color: #bbb;
+        }
+        
+        /* Contact Section */
+        #contact {
+            background-color: #fff;
+        }
+        
+        body.dark-mode #contact {
+            background-color: #1e1e1e;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark-mode .contact-form {
+            background-color: #252525;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-mode .form-group label {
+            color: #f5f5f5;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background-color: #333;
+            border-color: #444;
+            color: #f5f5f5;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 50px 0 20px;
+        }
+        
+        body.dark-mode footer {
+            background-color: #1a1a1a;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .footer-section p {
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background-color: #fff;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            body.dark-mode .nav-links {
+                background-color: #1e1e1e;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-img {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Dev<span>Craft</span></div>
+                <div class="hamburger" id="hamburger">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <button class="theme-toggle" id="themeToggle">
+                            <span id="themeIcon">🌙</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Crafting Digital Excellence</h1>
+                <p>We build websites that not only look stunning but also deliver exceptional performance and user experience. Let us help you establish a powerful online presence.</p>
+                <p><strong>Team : </strong> Sasidhar,Koteswar Rao,Mahesh,Faruk Khan,Shiva Kumar,</p>
+                <a href="#contact" class="btn">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We offer a comprehensive range of web development services to help your business thrive online.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🖥️</div>
+                    <h3>Website Development</h3>
+                    <p>Custom websites built from scratch to meet your specific business requirements with clean, efficient code.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Responsive Design</h3>
+                    <p>Websites that look and function perfectly on all devices, from desktops to smartphones.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛒</div>
+                    <h3>E-Commerce Solutions</h3>
+                    <p>Powerful online stores with secure payment gateways and intuitive shopping experiences.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>SEO Optimization</h3>
+                    <p>Websites optimized for search engines to help you rank higher and attract more visitors.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Performance Optimization</h3>
+                    <p>Lightning-fast websites that load quickly and provide smooth user experiences.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔄</div>
+                    <h3>Maintenance & Support</h3>
+                    <p>Ongoing support and maintenance to keep your website running smoothly at all times.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Us</h2>
+                <p>Get to know the team behind DevCraft and our passion for web development.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1579403124614-197f69d8187b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Web Developer">
+                </div>
+                <div class="about-text">
+                    <h3>Professional Web Developers</h3>
+                    <p>We are a team of passionate web developers with years of experience in creating beautiful, functional websites for businesses of all sizes.</p>
+                    <p>Our mission is to help businesses establish a strong online presence through custom web solutions that are tailored to their unique needs and goals.</p>
+                    <p>With expertise in modern web technologies and a focus on user experience, we deliver websites that not only look great but also perform exceptionally well.</p>
+                    <p>We believe in building long-term relationships with our clients and providing ongoing support to ensure their continued success online.</p>
+                    <a href="#contact" class="btn">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Have a project in mind or questions about our services? We'd love to hear from you.</p>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About DevCraft</h3>
+                    <p>We are a professional web development agency dedicated to creating beautiful, functional websites that help businesses succeed online.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><strong>Email: </strong>info@devcraft.com</p>
+                    <p><strong>Phone: </strong>+919346806126</p>
+                    <p><strong>Address: </strong>opposite to the shineshine layout,<br> flat.No-2-38 whitefield banglore</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DevCraft. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dark mode toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+            
+            // Check for saved user preference or use system preference
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                body.classList.add('dark-mode');
+                themeIcon.textContent = '☀️';
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    themeIcon.textContent = '☀️';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    themeIcon.textContent = '🌙';
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
+            // Hamburger menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-links');
+            
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking a link
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
